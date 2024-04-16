@@ -1,6 +1,7 @@
 package users
 
 import (
+	"net/http"
 	"react-auth/backend/domain/users"
 	"react-auth/backend/services"
 	"react-auth/backend/utils/errors"
@@ -17,6 +18,11 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	services.CreateUser(user)
+	result, saveErr := services.CreateUser(user)
+	if saveErr != nil {
+		c.JSON(saveErr.Status, saveErr)
+		return
+	}
 
+	c.JSON(http.StatusOK, result)
 }
