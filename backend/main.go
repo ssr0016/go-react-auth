@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "react-auth/backend/app"
 
 func main() {
-	fmt.Println("Hello, World!")
+	app.StartApplication()
 }
